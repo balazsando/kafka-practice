@@ -1,10 +1,10 @@
 package com.balazsando;
 
-import com.balazsando.enums.ProducerProps;
 import com.balazsando.model.Event;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.kafka.clients.producer.KafkaProducer;
 import org.apache.kafka.clients.producer.Producer;
+import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.clients.producer.ProducerRecord;
 
 import java.util.Properties;
@@ -19,9 +19,9 @@ public class Main {
         EventGenerator  eventGenerator = new EventGenerator();
 
         Properties props = new Properties();
-        props.put(ProducerProps.BOOTSTRAP_SERVERS.value, "localhost:9092,localhost:9094");
-        props.put(ProducerProps.KEY_SERIALIZER.value, "org.apache.kafka.common.serialization.StringSerializer");
-        props.put(ProducerProps.VALUE_SERIALIZER.value, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9094");
+        props.put(ProducerConfig.KEY_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
+        props.put(ProducerConfig.VALUE_SERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringSerializer");
 
         try(Producer<String, String> producer = new KafkaProducer<>(props)) {
             for (int i = 0; i < 10; i++) {

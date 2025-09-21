@@ -1,6 +1,6 @@
 package com.balazsando;
 
-import com.balazsando.enums.ConsumerProps;
+import org.apache.kafka.clients.consumer.ConsumerConfig;
 import org.apache.kafka.clients.consumer.ConsumerRecord;
 import org.apache.kafka.clients.consumer.ConsumerRecords;
 import org.apache.kafka.clients.consumer.KafkaConsumer;
@@ -17,11 +17,11 @@ public class Main {
         SuggestionEngine suggestionEngine = new SuggestionEngine();
 
         Properties props = new Properties();
-        props.put(ConsumerProps.BOOTSTRAP_SERVERS.value, "localhost:9092,localhost:9094");
-        props.put(ConsumerProps.GROUP_ID.value, GROUP_ID);
-        props.put(ConsumerProps.AUTO_OFFSET_RESET.value, "earliest");
-        props.put(ConsumerProps.KEY_DESERIALIZER.value, "org.apache.kafka.common.serialization.StringDeserializer");
-        props.put(ConsumerProps.VALUE_DESERIALIZER.value, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092,localhost:9094");
+        props.put(ConsumerConfig.GROUP_ID_CONFIG, GROUP_ID);
+        props.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        props.put(ConsumerConfig.KEY_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
+        props.put(ConsumerConfig.VALUE_DESERIALIZER_CLASS_CONFIG, "org.apache.kafka.common.serialization.StringDeserializer");
 
         try (KafkaConsumer<String, String> consumer = new KafkaConsumer<>(props)) {
             consumer.subscribe(Collections.singletonList(TOPIC));

@@ -48,3 +48,27 @@ AVRO
 - binary
 - not human readable
 - uses schema
+
+Kafka Stream
+- consumer (source) -> transformations (topology) -> producer (sink)
+- table -> processing evolving events -> compaction topic
+- stream -> processing independent events -> delete topic
+
+Processor
+- stateless
+    - branch
+    - filter
+    - inverse 
+    - filter
+    - map
+    - flatmap
+    - foreach
+    - peek
+    - groupby
+    - merge
+- stateful - state store
+    - aggregations
+    - count
+    - joins
+    - windowing
+    - custom processors
