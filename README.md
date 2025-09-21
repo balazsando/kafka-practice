@@ -1,6 +1,4 @@
-# kafka-practice
-
-Event driven architecture
+# Event driven architecture
 
 - Microservices
 - Serverless
@@ -23,7 +21,7 @@ Cons
 - loss of transactionality
 - lineage
 
-Event Storming & DDD
+### Event Storming & DDD
 
 - EDA revolves around events
 - coloring scheme
@@ -34,27 +32,31 @@ Event Storming & DDD
 - aggregate (events & commands)
 - bounded context
 
-Kafka
+---
+
+## Kafka
 - open source
 - java/scala (classes - compiler - jvm)
 - high throughput (no serialization, zero copy for non-TLS connections)
 - more than a messaging system (pub/sub, distributed storage, data processing)
 
-components
+### components
 - broker (cluster)
 - zookeeper (manages cluster)
 
-AVRO
+### AVRO
 - binary
 - not human readable
 - uses schema
 
-Kafka Stream
+---
+
+## Kafka Stream
 - consumer (source) -> transformations (topology) -> producer (sink)
 - table -> processing evolving events -> compaction topic
 - stream -> processing independent events -> delete topic
 
-Processor
+### Processor
 - stateless
     - branch
     - filter
@@ -72,3 +74,52 @@ Processor
     - joins
     - windowing
     - custom processors
+
+---
+
+## KSQL
+- KCLI - KSQL - Kafka stream
+- DDL
+    - CREATE STREAM
+    - CREATE TABLE
+    - DROP STREAM
+    - DROP TABLE
+    - CREATE STREAM AS SELECT
+    - CREATE TABLE AS SELECT
+- DML
+    - SELECT
+    - INSERT
+    - DELETE
+    - CREATE STREAM AS SELECT
+    - CREATE TABLE AS SELECT
+
+---
+
+## Kafka connect
+
+why use connect?
+- reuse code
+    - many intergration
+- avoid reinventing the wheel
+    - batch operations to db
+    - connection overhead is skipped
+- scalability
+    - standalone
+    - distribute
+
+### Architecture
+
+- Connect
+    - workers (working on the tasks)
+    - connectors (RDB, graphDB, searchEngine)
+        - source connector (JDBC source connector)
+        - sync connector (AWS S3 Sink connector)
+    - task
+- Kafka
+- Database
+
+Task
+- connector (from/to storage)
+- smt (single message transform)
+- converter (from/to kafka)
+
