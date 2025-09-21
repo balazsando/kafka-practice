@@ -123,3 +123,30 @@ Task
 - smt (single message transform)
 - converter (from/to kafka)
 
+---
+
+### REST proxy
+
+produced by confluent cloud
+
+for legacy application without kafka support
+
+acts as proxy between kafka and webapp
+
+web app -> post endpoint -> producer -> kafka
+kafka -> consumer -> get endpoint -> service
+
+start:
+`bin/kafka-rest-start config/kafka-rest.properties`
+
+test with curl:
+
+to produce:
+`curl -X POST http://localhost:8082/topics/deisgns -H 'Content-Type: application/vnd.kafka.json.v2+json' -d '{payload}' | json_pp`
+
+to set up consumer:
+`curl -X POST http://localhost:8082/consumers/designs-consumer-group/ -H 'Content-Type: application/vnd.kafka.v2+json' -d '{"name": "consumer-1", "format": "json", "auto.offset.reset": "earliest"}' | json_pp`
+assign topic:
+`curl -X POST http://localhost:8082/consumers/designs-consumer-group/instances/consumer-1/subscription -H 'Content-Type: application/vnd.kafka.v2+json' -d '{"topics": ["designs"]}'`
+to consume:
+`curl -X POST http://localhost:8082/consumers/designs-consumer-group/instances/consumer-1/records -H 'Accept: application/vnd.kafka.v2+json' | json_pp`
